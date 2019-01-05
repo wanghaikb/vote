@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<HEAD><META content="IE=11.0000"
+http-equiv="X-UA-Compatible">
+<META http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<TITLE></TITLE> <LINK href="css/style.css" rel="stylesheet" 
+type="text/css"> 
+<SCRIPT type="text/javascript">
+window.onload = function(){
+	var input = document.getElementById("loginBox").getElementsByTagName("input");
+	for(i=0; i<input.length; i++) {
+		var type = input[i].getAttribute("type");
+		if(type == "text" || type == "password") {
+			input[i].onfocus = function(){
+				this.className += " input-text-over";
+			}
+			input[i].onblur = function(){
+				this.className = this.className.replace(/input-text-over/, "");
+			}
+		} else if(type == "submit") {
+			input[i].onmouseover = function(){
+				this.className += " input-submit-over";
+			}
+			input[i].onmouseout = function(){
+				this.className = this.className.replace(/input-button-over/, "");
+			}
+		}
+	}
+}
+</SCRIPT>
+ 
+<META name="GENERATOR" content="MSHTML 11.00.10586.420"></HEAD> 
+<BODY>
+<DIV class="wrap" id="header"><IMG src="images/logo.gif"> </DIV>
+<DIV class="wrap" id="login">
+<DIV class="main">
+<DIV class="corner"></DIV>
+<DIV class="introduce">
+<H2>北大青鸟</H2>
+<P>网上调查系统...</P></DIV>
+<DIV class="login">
+<H2>用户登录</H2>
+<FORM action="login?pagenum=1" method="post">
+<DL id="loginBox">
+  <DT>用户名：</DT>
+  <DD><INPUT name="username" class="input-text" type="text"></DD>
+  <DT>密　码：</DT>
+  <DD><INPUT name="password" class="input-text" type="password"></DD>
+  <DT></DT>
+  <DD><INPUT name="submit" class="input-button" type="submit" value="登录"> <A 
+  href="http://localhost:8080/regist.html">新用户注册</A></DD></DL></FORM>
+<DIV class="error" th:text="${error}"></DIV></DIV></DIV></DIV>
+<DIV class="wrap"></DIV>
+<DIV class="wrap" id="footer">	北大青鸟 © 版权所有 </DIV></BODY></HTML>

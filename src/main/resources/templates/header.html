@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<HEAD><META content="IE=11.0000"
+            http-equiv="X-UA-Compatible">
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <TITLE>投票列表</TITLE> <LINK href="css/style.css" rel="stylesheet" type="text/css">
+    <META name="GENERATOR" content="MSHTML 11.00.10586.420"></HEAD>
+<body>
+<DIV class="wrap" id="navbar" th:fragment="header">
+    <DIV class="profile"><span th:text="'您好,'+${user.username}"></span><SPAN class="return"><A th:href="@{login(pagenum=1,username=${user.username},password=${user.password})}">返回列表</A></SPAN>
+        <SPAN class="addnew"><A href="addsub">添加新投票</A></SPAN>
+        <SPAN class="modify"><A href="maintain?pagenum=1">维护</A></SPAN>
+        <SPAN class="return"><A
+                href="outLogin">注销</A></SPAN>	 </DIV>
+    <DIV class="search">
+        <FORM action="title?pagenum=1" method="post"><INPUT name="title" class="input-text" type="text" th:value="${subject.title}"><INPUT name="submit" class="input-button" type="submit" value=""/>
+        </FORM></DIV>
+</DIV>
+</body>
+</html>

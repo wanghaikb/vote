@@ -1,0 +1,45 @@
+mybatis:
+  type-aliases-package: cn.wh.pojo
+  mapper-locations: classpath:cn.wh.dao/*.xml
+  configuration:
+    auto-mapping-behavior: full
+    use-generated-keys: true
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  page-size-zero: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///vote?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm
+    time-zone: GMT+8
+
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+
+  thymeleaf:
+    encoding: UTF-8
+    cache: false
+    #prefix: classpath:/templates/
+    #suffix: .html
+
+  redis:
+    database: 0
+    host: 106.13.54.236
+    port: 6868
+    password: 123456
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0

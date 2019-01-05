@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><HEAD><META content="IE=11.0000"
+http-equiv="X-UA-Compatible">
+ 
+<META http-equiv="Content-Type" content="text/html; charset=utf-8"> <TITLE>注   
+册</TITLE> <LINK href="css/style.css" rel="stylesheet" type="text/css">
+
+  <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript">
+    function findUser(value) {
+      $.get('isExist',{name:value},function (r) {
+        if(r=='success'){
+          alert("该用户名已存在！")
+            $("#submit").attr({ disabled: "disabled" });
+        }else{
+          alert("该用户名可以使用！")
+            $("#submit").removeAttr("disabled");
+        }
+      })
+    }
+</script>
+ 
+<META name="GENERATOR" content="MSHTML 11.00.10586.420"></HEAD> 
+<BODY>
+<DIV class="wrap" id="header"><IMG src="images/logo.gif"> </DIV>
+<DIV class="wrap" id="navbar" th:replace="header::header">
+<DIV class="box" id="register">
+<H2>新用户注册</H2>
+<DIV class="content">
+<FORM onsubmit="return check()" action="regist" method="post">
+<DL>
+  <DT>用户名：</DT>
+  <DD><INPUT name="username" class="input-text" id="username"  onblur="findUser(this.value)" type="text"/></DD>
+  <DT>密码：</DT>
+  <DD><INPUT name="password" class="input-text" id="password" type="password"/></DD>
+  <DT>确认密码：</DT>
+  <DD><INPUT name="confirmPassword" class="input-text" id="repass" type="password"/></DD>
+  <DT></DT>
+  <DD><INPUT name="submit" id="submit" class="input-button" type="submit" value=""/></DD></DL></FORM>
+<DIV class="error"></DIV>
+<DIV class="error"></DIV></DIV></DIV>
+<DIV class="wrap" id="footer">北大青鸟 © 版权所有 </DIV></BODY></HTML>

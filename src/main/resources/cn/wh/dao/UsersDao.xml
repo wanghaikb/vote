@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wh.dao.UsersDao">
+    <insert id="regist" parameterType="cn.wh.pojo.Users">
+        INSERT INTO `users`(username,PASSWORD,isAdmin) VALUES(#{username},#{password},0)
+    </insert>
+    <select id="isexist" parameterType="string" resultType="int">
+        SELECT COUNT(0) FROM users WHERE username=#{username}
+    </select>
+    <select id="login" resultType="Users">
+        SELECT * FROM users WHERE username=#{username} AND PASSWORD=#{password}
+    </select>
+</mapper>

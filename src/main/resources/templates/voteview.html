@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><HEAD><META content="IE=11.0000"
+http-equiv="X-UA-Compatible">
+ 
+<META http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<TITLE></TITLE> <LINK href="css/style.css" rel="stylesheet" type="text/css"> 
+<META name="GENERATOR" content="MSHTML 11.00.10586.420"></HEAD> 
+<BODY>
+<DIV class="wrap" id="header"><IMG src="images/logo.gif"> </DIV>
+<DIV class="wrap" id="navbar" th:replace="header::header"></DIV>
+<DIV class="wrap" id="vote">
+<H2>查看投票</H2>
+<UL class="list">
+  <LI>
+  <H4 th:text="${title}"></H4>
+  <P class="info" th:text="'共有 '+${options}+' 个选项，已有 '+${votes}+' 个投票。'"></P>
+  <OL>
+    <LI th:each="oo:${ops}"><span th:text="${oo.content}"></span>
+    <DIV class="rate">
+    <DIV class="ratebg">
+    <DIV class="percent" th:style="'width:'+${votes==0?0:#numbers.formatDecimal(oo.votes*100/votes,1,2)+'%'}"></DIV></DIV>
+    <P><span th:text="${oo.votes}+'票'"></span><SPAN th:text="'('+${votes==0?0:oo.votes*100/votes+'%'}+')'"></SPAN></P></DIV></LI>
+  </OL>
+  <DIV class="goback"><A href="http://localhost:8080/myVote/Subject-list.action?entityId=21">返回投票列表</A></DIV></LI></UL></DIV>
+<DIV class="wrap" id="footer">	北大青鸟 © 版权所有 </DIV></BODY></HTML>

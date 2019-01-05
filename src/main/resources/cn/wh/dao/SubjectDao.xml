@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wh.dao.SubjectDao">
+    <select id="getAllSub" resultType="Subject">
+        SELECT s.`sid`,s.`title` as title,COUNT(i.`sid`) AS votes,os.osid AS OPTIONS,TYPE FROM SUBJECT AS s LEFT JOIN item AS i ON i.`sid`=s.`sid`
+LEFT JOIN(SELECT s.`sid` AS ss,COUNT(o.`osid`) AS osid FROM SUBJECT AS s LEFT JOIN OPTIONS AS o ON s.`sid`=o.`osid` GROUP BY s.`sid`)os ON s.`sid`=os.ss
+<where>
+  <if test="title!=null and title!=''">title like concat('%',#{title},'%')</if>
+</where>
+GROUP BY s.`sid`
+    </select>
+    <select id="getContent" resultType="Options">
+        SELECT o.oid,content,COUNT(i.oid) AS votes FROM OPTIONS AS o LEFT JOIN item AS i ON i.`oid`=o.oid WHERE osid=#{sid} GROUP BY oid;
+    </select>
+    <select id="isVote" resultType="int">
+        SELECT COUNT(0) FROM item WHERE uid=#{uid} AND sid=#{sid};
+    </select>
+    <insert id="voteing" parameterType="Item">
+        INSERT INTO item(uid,sid,oid) VALUES(#{uid},#{sid},#{oid});
+    </insert>
+    <insert id="addsub" parameterType="Subject" keyProperty="sid" useGeneratedKeys="true">
+        INSERT INTO SUBJECT(title,TYPE) VALUES(#{title},#{type})
+    </insert>
+    <insert id="addopp" parameterType="Options">
+        INSERT INTO OPTIONS(content,osid) VALUES(#{content},#{sid})
+    </insert>
+    <select id="getBySid" resultType="Subject">
+        SELECT * FROM SUBJECT WHERE sid=#{sid}
+    </select>
+    <select id="getcontbysid" resultType="Options">
+        SELECT * FROM OPTIONS WHERE osid=#{sid}
+    </select>
+    <update id="updateType" parameterType="Subject">
+        UPDATE SUBJECT SET TYPE=#{type} WHERE sid=#{sid}
+    </update>
+    <update id="updateContent" parameterType="Options">
+        UPDATE OPTIONS SET content=#{content} WHERE oid=#{oid}
+    </update>
+    <delete id="deletesbj" parameterType="int">
+        DELETE FROM SUBJECT WHERE sid=#{sid}
+    </delete>
+    <delete id="deleteops" parameterType="int">
+        DELETE FROM options WHERE osid=#{sid}
+    </delete>
+    <delete id="deleteitem" parameterType="int">
+        DELETE FROM item WHERE sid=#{sid}
+    </delete>
+</mapper>
